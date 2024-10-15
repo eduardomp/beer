@@ -1,4 +1,4 @@
-# ISBEER - "I See BackEnd Environments in Reatime"
+# ISBEER - "I See BackEnd Environments in Realtime"
 
 
 ## What is ISBEER?
@@ -16,8 +16,8 @@ TODO
 
 ```shell
 .
-├── core						// CORE - The main application with their  entities and services 
-├── cli							// CLI - The command line interface to interact with the CORE application
+├── core						// CORE - The main module with their entities and services 
+├── cli							// CLI - The command line interface. Our app entrypoint
 |── api							// API - The REST API to interact with the CORE application (Gofiber)
 └── ui							// UI  - The user interface that consumes the REST API (Svelte)
 ```
