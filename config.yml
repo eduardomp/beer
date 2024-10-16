@@ -1,0 +1,22 @@
+nodes:
+  - name: node1
+    ports:
+      - 3000
+      - 3001
+      - 3002
+    host: localhost
+    type: container
+    volumes:
+      - /var/lib/mysql
+    dirs:
+      - /var/lib/mysql
+  - name: node2
+    ports:
+      - 3003
+      - 3004
+    host: localhost
+    type: application
+    volumes:
+      - /var/lib/mysql
+    dirs: 
+      - /var/lib/mysql

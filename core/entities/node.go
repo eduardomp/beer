@@ -8,3 +8,7 @@ type Node struct {
 	Volumes []string
 	Dirs    []string
 }
+
+type Nodes struct {
+	Nodes []Node
+}
