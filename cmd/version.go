@@ -16,6 +16,6 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "BEER version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("BEER 1.0.0")
+		fmt.Println("🍺 BEER \"BackEnd Engineers Rocks\" \nv1.0.0")
 	},
 }
