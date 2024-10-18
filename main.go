@@ -1,5 +1,15 @@
 package main
 
+import (
+	"beer/util"
+
+	"beer/cmd"
+)
+
 func main() {
-	println("Hello World")
+
+	util.LoadDotEnv()
+
+	cmd.Execute()
+
 }
