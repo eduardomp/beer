@@ -12,7 +12,8 @@ var rootCmd = &cobra.Command{
 	Short: "BEER - BackEnd Engineers Rocks",
 	Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("AHhhhhhhhh")
+
+		fmt.Println("Soon...")
 	},
 }
 
