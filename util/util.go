@@ -15,7 +15,7 @@ func LoadDotEnv() {
 }
 
 func Config(key string, defaultValue string) string {
-
+	LoadDotEnv()
 	value, exists := os.LookupEnv(key)
 	if exists {
 		return value
