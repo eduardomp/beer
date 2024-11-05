@@ -1,14 +1,14 @@
 package services
 
 import (
-	"beer/core/entities"
+	"beer/core/model"
 	"beer/util"
 	"os"
 
 	"gopkg.in/yaml.v3"
 )
 
-func GetNodes() entities.Nodes {
+func GetApps() model.Apps {
 	configPath := util.Config("BEER_CONFIG_PATH", "../../config.yml")
 
 	config, error := os.ReadFile(configPath)
@@ -16,12 +16,12 @@ func GetNodes() entities.Nodes {
 		panic(error)
 	}
 
-	nodes := entities.Nodes{}
-	err := yaml.Unmarshal([]byte(config), &nodes)
+	apps := model.Apps{}
+	err := yaml.Unmarshal([]byte(config), &apps)
 	if err != nil {
 		panic(err)
 	}
 
-	return nodes
+	return apps
 
 }

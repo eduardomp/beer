@@ -1,14 +1,14 @@
 package services
 
 import (
-	"beer/core/entities"
+	"beer/core/model"
 	"reflect"
 	"testing"
 )
 
-func TestGetNodes(t *testing.T) {
-	want := entities.Nodes{
-		Nodes: []entities.Node{
+func TestGetApps(t *testing.T) {
+	want := model.Apps{
+		Apps: []model.App{
 			{
 				Name:    "node1",
 				Ports:   []int{3000, 3001, 3002},
@@ -28,10 +28,10 @@ func TestGetNodes(t *testing.T) {
 		},
 	}
 
-	got := GetNodes()
+	got := GetApps()
 
 	if !reflect.DeepEqual(got, want) {
-		t.Errorf("LoadNodes() = %v, want %v", got, want)
+		t.Errorf("GetApps() = %v, want %v", got, want)
 	}
 
 }

@@ -1,13 +1,13 @@
 package services
 
 import (
-	"beer/core/entities"
+	"beer/core/model"
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/inhies/go-bytesize"
 )
 
-func GetHost() entities.Host {
+func GetHost() model.Host {
 	host, err := sysinfo.Host()
 	if err != nil {
 		panic(err)
@@ -16,11 +16,11 @@ func GetHost() entities.Host {
 	memo, _ := host.Memory()
 	info := host.Info()
 
-	return entities.Host{
+	return model.Host{
 		Host: info.Hostname,
 		OS:   info.OS.Type + " " + info.OS.Version,
 		Arch: info.NativeArchitecture,
-		Memo: entities.Memo{
+		Memo: model.Memo{
 			Total:     bytesize.New(float64(memo.Total)).String(),
 			Free:      bytesize.New(float64(memo.Free)).String(),
 			Used:      bytesize.New(float64(memo.Used)).String(),
