@@ -1,4 +1,4 @@
-nodes:
+apps:
   - name: node1
     ports:
       - 3000

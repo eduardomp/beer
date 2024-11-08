@@ -1,14 +1,15 @@
-package entities
+package model
 
-type Node struct {
+type App struct {
 	Name    string
 	Ports   []int
 	Host    string
 	Type    string
 	Volumes []string
 	Dirs    []string
+	Process Process
 }
 
-type Nodes struct {
-	Nodes []Node
+type Apps struct {
+	Apps []App
 }
