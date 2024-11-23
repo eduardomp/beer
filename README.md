@@ -8,17 +8,16 @@ A tool to help amazing backend developers to visualize their wonderful applicati
 TODO
 ## Setup
 TODO
-## Contribute
-TODO
 
 ## Base Directory Structure
 
 ```shell
 .
+|── api							// API  - The REST API to interact with the CORE application (Gofiber)
+|── cmd						    // CMD  - The CLI module implemented using Cobra
 ├── core						// CORE - The main module with their entities and services 
 ├── util						// UTIL - Commom functions to help in ordinary tasks
-|── api							// API  - The REST API to interact with the CORE application (Gofiber)
-└── ui							// UI   - The user interface that consumes the REST API (Svelte)
+└── web							// WEB   - The user interface that consumes the REST API (Svelte)
 ```
 
 # Roadmap to v1.0.0
