@@ -1,7 +1,7 @@
 package util
 
 import (
-	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -11,7 +11,7 @@ import (
 func LoadDotEnv() {
 	err := godotenv.Load(".env")
 	if err != nil {
-		fmt.Print("Error loading .env file")
+		log.Fatal("Error loading .env file")
 	}
 }
 

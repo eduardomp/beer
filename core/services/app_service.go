@@ -2,7 +2,7 @@ package services
 
 import (
 	"beer/core/model"
-	"fmt"
+	"log"
 	"os"
 	"slices"
 
@@ -42,8 +42,8 @@ func GetApps(configPath string) []model.App {
 	apps := GetAppsFromConfig(configPath)
 	processes := GetProcessInfo()
 
-	fmt.Printf("Apps: %v\n", len(apps.Apps))
-	fmt.Printf("Processes: %v\n", len(processes))
+	log.Printf("Apps: %v\n", len(apps.Apps))
+	log.Printf("Processes: %v\n", len(processes))
 
 	result := make([]model.App, 0)
 

@@ -3,7 +3,6 @@ package cmd
 import (
 	"beer/core/services"
 	"beer/util"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -25,25 +24,25 @@ var (
 				configPath = cfgFile
 			}
 
-			fmt.Printf("Config path: %v\n", configPath)
+			log.Printf("Config path: %v\n", configPath)
 
-			fmt.Println("Loading apps ...")
+			log.Println("Loading apps ...")
 			apps := services.GetApps(configPath)
 
 			for _, app := range apps {
-				fmt.Println("-----------------------------------------------------------------")
-				fmt.Println("App name: ", app.Name)
-				fmt.Println("App Process name:", app.Process.Name)
-				fmt.Println("App Process pid:", app.Process.Pid)
-				fmt.Println("App Process cmdline:", app.Process.Cmdline)
-				fmt.Println("App Process status:", app.Process.Status)
-				fmt.Println("App Process connections:", app.Process.Connections)
+				log.Println("-----------------------------------------------------------------")
+				log.Println("App name: ", app.Name)
+				log.Println("App Process name:", app.Process.Name)
+				log.Println("App Process pid:", app.Process.Pid)
+				log.Println("App Process cmdline:", app.Process.Cmdline)
+				log.Println("App Process status:", app.Process.Status)
+				log.Println("App Process connections:", app.Process.Connections)
 			}
 
 			fs := http.FileServer(http.Dir("./web/build"))
 			http.Handle("/", fs)
 
-			fmt.Print("\n\nListening on http://localhost:9090 ...\n")
+			log.Print("Listening on http://localhost:9090/ ...")
 			err := http.ListenAndServe(":9090", nil)
 			if err != nil {
 				log.Fatal(err)
@@ -59,7 +58,7 @@ func init() {
 
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		log.Fatal(err)
 		os.Exit(1)
 	}
 }
