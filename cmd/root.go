@@ -9,43 +9,42 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var rootCmd = &cobra.Command{
-	Use:   "beer",
-	Short: "BEER - BackEnd Engineers Rocks",
-	Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
-	Run: func(cmd *cobra.Command, args []string) {
+var (
+	cfgFile string
+	rootCmd = &cobra.Command{
+		Use:   "beer",
+		Short: "BEER - BackEnd Engineers Rocks",
+		Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
+		Run: func(cmd *cobra.Command, args []string) {
 
-		fmt.Println("Loading apps ...")
+			fmt.Println("Loading apps ...")
 
-		configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
+			configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
 
-		apps := services.GetApps(configPath)
+			if cfgFile != "" {
+				configPath = cfgFile
+			}
 
-		for _, app := range apps {
-			fmt.Println("-----------------------------------------------------------------")
-			fmt.Println("App name: ", app.Name)
-			fmt.Println("App Process name:", app.Process.Name)
-			fmt.Println("App Process pid:", app.Process.Pid)
-			fmt.Println("App Process cmdline:", app.Process.Cmdline)
-			fmt.Println("App Process status:", app.Process.Status)
-			fmt.Println("App Process connections:", app.Process.Connections)
-		}
+			fmt.Printf("Config path: %v\n", configPath)
 
-		//TODO: Return filled apps in the list to contruct the graph
+			apps := services.GetApps(configPath)
 
-		/*
-			interfaces, _ := net.Interfaces()
+			for _, app := range apps {
+				fmt.Println("-----------------------------------------------------------------")
+				fmt.Println("App name: ", app.Name)
+				fmt.Println("App Process name:", app.Process.Name)
+				fmt.Println("App Process pid:", app.Process.Pid)
+				fmt.Println("App Process cmdline:", app.Process.Cmdline)
+				fmt.Println("App Process status:", app.Process.Status)
+				fmt.Println("App Process connections:", app.Process.Connections)
+			}
 
-			for _, i := range interfaces {
-				fmt.Println(i.Index)
-				fmt.Println(i.Name)
-				fmt.Println(i.HardwareAddr)
-				fmt.Println(i.Flags)
-				fmt.Println(i.MTU)
-				fmt.Println("--------")
-			}*/
+		},
+	}
+)
 
-	},
+func init() {
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $PWD/config.beer.yml)")
 }
 
 func Execute() {
