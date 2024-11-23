@@ -2,7 +2,6 @@ package services
 
 import (
 	"beer/core/model"
-	"beer/util"
 	"fmt"
 	"os"
 	"slices"
@@ -12,9 +11,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-func GetAppsFromConfig() model.Apps {
-	configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
-
+func GetAppsFromConfig(configPath string) model.Apps {
 	config, error := os.ReadFile(configPath)
 	if error != nil {
 		panic(error)
@@ -41,8 +38,8 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 	return len(ports) > 0
 }
 
-func GetApps() []model.App {
-	apps := GetAppsFromConfig()
+func GetApps(configPath string) []model.App {
+	apps := GetAppsFromConfig(configPath)
 	processes := GetProcessInfo()
 
 	fmt.Printf("Apps: %v\n", len(apps.Apps))

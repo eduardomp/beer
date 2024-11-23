@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"beer/core/services"
+	"beer/util"
 	"fmt"
 	"os"
 
@@ -16,7 +17,9 @@ var rootCmd = &cobra.Command{
 
 		fmt.Println("Loading apps ...")
 
-		apps := services.GetApps()
+		configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
+
+		apps := services.GetApps(configPath)
 
 		for _, app := range apps {
 			fmt.Println("-----------------------------------------------------------------")
