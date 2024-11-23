@@ -2,49 +2,45 @@ package services
 
 import (
 	"beer/core/model"
-	"fmt"
-	"time"
+	"sync"
 
 	"github.com/shirou/gopsutil/process"
 )
 
 func GetProcessInfo() []model.Process {
-	c := make(chan model.Process)
+	var wg sync.WaitGroup
+	var mutex sync.Mutex
+
 	processes, _ := process.Processes()
 	result := make([]model.Process, 0)
 
 	for i := 0; i < len(processes); i++ {
 		p := processes[i]
+		wg.Add(1)
 		go func() {
+			defer wg.Done()
+
 			status, _ := p.Status()
 			name, _ := p.Name()
 			cmd, _ := p.Cmdline()
 			connections, _ := p.Connections()
 
 			if len(connections) > 0 {
-
-				c <- model.Process{
+				mutex.Lock()
+				result = append(result, model.Process{
 					Name:    name,
 					Pid:     int(p.Pid),
 					Cmdline: cmd,
 					Status:  status,
-				}
-
+				})
+				mutex.Unlock()
 			}
 
 		}()
 
 	}
 
-	for range c {
-		select {
-		case proc := <-c:
-			result = append(result, proc)
-		case <-time.After(time.Second * 10):
-			fmt.Println("Timeout to collect process information!")
-			close(c)
-		}
-	}
+	wg.Wait()
 
 	return result
 }
