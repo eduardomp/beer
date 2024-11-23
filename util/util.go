@@ -3,6 +3,7 @@ package util
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/joho/godotenv"
 )
@@ -19,6 +20,18 @@ func Config(key string, defaultValue string) string {
 	value, exists := os.LookupEnv(key)
 	if exists {
 		return value
+	}
+
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+	exPath := filepath.Dir(ex)
+
+	configPathFromContext := filepath.Join(exPath, defaultValue)
+
+	if _, err := os.Stat(configPathFromContext); err == nil {
+		return configPathFromContext
 	}
 
 	return defaultValue

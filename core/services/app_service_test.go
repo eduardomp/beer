@@ -10,18 +10,18 @@ func TestGetAppsFromConfig(t *testing.T) {
 	want := model.Apps{
 		Apps: []model.App{
 			{
-				Name:    "node1",
-				Ports:   []int{3000, 3001, 3002},
+				Name:    "db-1",
+				Ports:   []int{5432},
 				Host:    "localhost",
 				Type:    "container",
 				Volumes: []string{"/var/lib/mysql"},
 				Dirs:    []string{"/var/lib/mysql"},
 			},
 			{
-				Name:    "node2",
-				Ports:   []int{3003, 3004},
+				Name:    "web-1",
+				Ports:   []int{4000},
 				Host:    "localhost",
-				Type:    "application",
+				Type:    "container",
 				Volumes: []string{"/var/lib/mysql"},
 				Dirs:    []string{"/var/lib/mysql"},
 			},

@@ -13,7 +13,7 @@ import (
 )
 
 func GetAppsFromConfig() model.Apps {
-	configPath := util.Config("BEER_CONFIG_PATH", "../../config.yml")
+	configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
 
 	config, error := os.ReadFile(configPath)
 	if error != nil {
