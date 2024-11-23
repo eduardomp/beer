@@ -4,6 +4,8 @@ import (
 	"beer/core/services"
 	"beer/util"
 	"fmt"
+	"log"
+	"net/http"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -17,8 +19,6 @@ var (
 		Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
 		Run: func(cmd *cobra.Command, args []string) {
 
-			fmt.Println("Loading apps ...")
-
 			configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
 
 			if cfgFile != "" {
@@ -27,6 +27,7 @@ var (
 
 			fmt.Printf("Config path: %v\n", configPath)
 
+			fmt.Println("Loading apps ...")
 			apps := services.GetApps(configPath)
 
 			for _, app := range apps {
@@ -37,6 +38,15 @@ var (
 				fmt.Println("App Process cmdline:", app.Process.Cmdline)
 				fmt.Println("App Process status:", app.Process.Status)
 				fmt.Println("App Process connections:", app.Process.Connections)
+			}
+
+			fs := http.FileServer(http.Dir("./web/build"))
+			http.Handle("/", fs)
+
+			fmt.Print("\n\nListening on http://localhost:9090 ...\n")
+			err := http.ListenAndServe(":9090", nil)
+			if err != nil {
+				log.Fatal(err)
 			}
 
 		},
