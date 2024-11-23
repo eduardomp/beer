@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestGetApps(t *testing.T) {
+func TestGetAppsFromConfig(t *testing.T) {
 	want := model.Apps{
 		Apps: []model.App{
 			{
@@ -28,7 +28,7 @@ func TestGetApps(t *testing.T) {
 		},
 	}
 
-	got := GetApps()
+	got := GetAppsFromConfig()
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("GetApps() = %v, want %v", got, want)

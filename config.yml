@@ -1,21 +1,18 @@
 apps:
-  - name: node1
+  - name: db-1
     ports:
-      - 3000
-      - 3001
-      - 3002
+      - 5432
     host: localhost
     type: container
     volumes:
       - /var/lib/mysql
     dirs:
       - /var/lib/mysql
-  - name: node2
+  - name: web-1
     ports:
-      - 3003
-      - 3004
+      - 4000
     host: localhost
-    type: application
+    type: container
     volumes:
       - /var/lib/mysql
     dirs: 

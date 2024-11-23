@@ -28,10 +28,11 @@ func GetProcessInfo() []model.Process {
 			if len(connections) > 0 {
 				mutex.Lock()
 				result = append(result, model.Process{
-					Name:    name,
-					Pid:     int(p.Pid),
-					Cmdline: cmd,
-					Status:  status,
+					Name:        name,
+					Pid:         int(p.Pid),
+					Cmdline:     cmd,
+					Status:      status,
+					Connections: connections,
 				})
 				mutex.Unlock()
 			}

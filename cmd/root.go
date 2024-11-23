@@ -14,9 +14,20 @@ var rootCmd = &cobra.Command{
 	Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		services.GetProcessInfo()
+		fmt.Println("Loading apps ...")
 
-		//TODO: Filter processes by mapped apps in the config file
+		apps := services.GetApps()
+
+		for _, app := range apps {
+			fmt.Println("-----------------------------------------------------------------")
+			fmt.Println("App name: ", app.Name)
+			fmt.Println("App Process name:", app.Process.Name)
+			fmt.Println("App Process pid:", app.Process.Pid)
+			fmt.Println("App Process cmdline:", app.Process.Cmdline)
+			fmt.Println("App Process status:", app.Process.Status)
+			fmt.Println("App Process connections:", app.Process.Connections)
+		}
+
 		//TODO: Return filled apps in the list to contruct the graph
 
 		/*

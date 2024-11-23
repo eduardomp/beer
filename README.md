@@ -39,7 +39,7 @@ TODO
 - [ ] CLI: Node Memory
 - [ ] CLI: Node Disk
 - [ ] CLI: Node Network
-- [ ] CLI: Node Process
+- [X] CLI: Node Process
 - [ ] CLI: Host System Info
 - [ ] CLI: Host Environment Variables
 - [ ] API:  Get Nodes
