@@ -6,40 +6,47 @@
 	  Background,
 	  BackgroundVariant,
 	  MiniMap,
-	  type ColorMode
+	  type ColorMode,
+	  type Node,
+	  type Edge,
 	} from '@xyflow/svelte';
    
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
 	import '@xyflow/svelte/dist/style.css';
    
 	// We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
-	const nodes = writable([
+	const initialNodes : Node[] = [
 	  {
 		id: '1',
 		type: 'input',
-		data: { label: 'Input Node' },
+		data: { label: 'Input Node', body: "This is the input node" },
+		style: 'border: 1px solid #8e42f7; padding: 10px;',
 		position: { x: 0, y: 0 }
 	  },
 	  {
 		id: '2',
 		type: 'default',
 		data: { label: 'Node' },
+		style: 'border: 1px solid #8e42f7; padding: 10px;',
 		position: { x: 0, y: 150 }
 	  }
-	]);
+	];
    
 	// same for edges
-	const edges = writable([
+	const initialEdges: Edge[] = [
 	  {
 		id: '1-2',
 		type: 'default',
 		source: '1',
 		target: '2',
-		label: 'Edge Text'
+		label: 'HTTP'
 	  }
-	]);
+	];
    
 	let colorMode: ColorMode = 'dark';
+
+	const nodes = writable<Node[]>(initialNodes);
+  	const edges = writable(initialEdges);
   </script>
    
   <!--

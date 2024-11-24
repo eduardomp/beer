@@ -49,4 +49,48 @@ TODO
 - [ ] UI:   Show Nodes
 - [ ] UI:   Show Nodes Info
 - [ ] UI:   Show Nodes Interactions Animations (websockets)
-- [ ] UI:   Show Nodes Logs
+- [ ] UI:   Show Nodes 
+
+# Ideas
+
+## 1 
+
+Add http requests to the config file to create a Node in UI with a list of requests to be made against the apps
+following the syntax of ```.http``` files https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-9.0#http-file-syntax
+
+
+```yaml
+requests: |
+
+  GET http://localhost:4000/api/v1/apps
+  Accept: application/json
+  Content-Type: application/json
+  
+  ###
+
+  GET /
+  Accept: application/json
+  Content-Type: application/json
+
+```
+
+or add 
+
+```yaml
+requests:
+  - method: GET
+    url: http://localhost:4000/api/v1/apps
+    headers:
+      Accept: application/json
+      Content-Type: application/json
+```
+
+or even
+
+```yaml
+requestsFile: requests.http #or requests.rest
+```
+
+With the possibility to add environments 
+
+
