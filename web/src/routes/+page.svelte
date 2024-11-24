@@ -5,7 +5,8 @@
 	  Controls,
 	  Background,
 	  BackgroundVariant,
-	  MiniMap
+	  MiniMap,
+	  type ColorMode
 	} from '@xyflow/svelte';
    
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
@@ -38,7 +39,7 @@
 	  }
 	]);
    
-	const snapGrid = [25, 25];
+	let colorMode: ColorMode = 'dark';
   </script>
    
   <!--
@@ -49,7 +50,7 @@
 	<SvelteFlow
 	  {nodes}
 	  {edges}
-	  {snapGrid}
+	  {colorMode}
 	  fitView
 	  on:nodeclick={(event: { detail: { node: any; }; }) => console.log('on node click', event.detail.node)}
 	>
