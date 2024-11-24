@@ -2,7 +2,7 @@ package services
 
 import (
 	"beer/core/model"
-	"log"
+	"beer/util"
 	"os"
 	"slices"
 
@@ -38,12 +38,10 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 	return len(ports) > 0
 }
 
-func GetApps(configPath string) []model.App {
+func GetApps() []model.App {
+	configPath := util.Config("BEER_CONFIG_PATH", "${PWD}/config.beer.yml")
 	apps := GetAppsFromConfig(configPath)
 	processes := GetProcessInfo()
-
-	log.Printf("Apps: %v\n", len(apps.Apps))
-	log.Printf("Processes: %v\n", len(processes))
 
 	result := make([]model.App, 0)
 

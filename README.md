@@ -45,7 +45,7 @@ TODO
 - [ ] API:  Get Host Info
 - [ ] API:  Expose Nodes interactions via websockets in real-time
 - [ ] API:  Expose Nodes metrics via websockets in real-time
-- [ ] UI:   Create UI
+- [X] UI:   Create UI
 - [ ] UI:   Show Nodes
 - [ ] UI:   Show Nodes Info
 - [ ] UI:   Show Nodes Interactions Animations (websockets)

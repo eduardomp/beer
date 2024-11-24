@@ -15,6 +15,13 @@ func LoadDotEnv() {
 	}
 }
 
+func SetEnv(key string, value string) {
+	err := os.Setenv(key, value)
+	if err != nil {
+		log.Fatal("Error setting env variable")
+	}
+}
+
 func Config(key string, defaultValue string) string {
 	LoadDotEnv()
 	value, exists := os.LookupEnv(key)
