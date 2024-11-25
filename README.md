@@ -20,6 +20,25 @@ TODO
 └── web							// WEB   - The user interface that consumes the REST API (Svelte)
 ```
 
+## Building
+
+First you need to install the dependencies and buid the web application:
+
+```shell
+cd web
+npm install
+npm run build
+```
+
+Then you can build the CLI application:
+
+```shell
+# go to the root folder
+go build
+```
+
+The folder web/build contains the static files that are served by the web application. And this folder is embedded in the CLI application.
+
 # Roadmap to v1.0.0
 - [X] CORE: Identify model entities
 - [ ] CORE: Create a scheme and validator to the config yml file
