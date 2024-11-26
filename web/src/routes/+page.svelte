@@ -9,6 +9,7 @@
 	  type ColorMode,
 	  type Node,
 	  type Edge,
+	  type ProOptions,
 	} from '@xyflow/svelte';
    
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
@@ -44,6 +45,9 @@
 	];
    
 	let colorMode: ColorMode = 'dark';
+	let proOptions: ProOptions = {
+		hideAttribution: true,
+	}
 
 	const nodes = writable<Node[]>(initialNodes);
   	const edges = writable(initialEdges);
@@ -59,6 +63,7 @@
 	  {edges}
 	  {colorMode}
 	  fitView
+	  {proOptions}
 	  on:nodeclick={(event: { detail: { node: any; }; }) => console.log('on node click', event.detail.node)}
 	>
 	  <Controls />
