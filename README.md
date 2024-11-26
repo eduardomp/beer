@@ -60,15 +60,17 @@ The folder web/build contains the static files that are served by the web applic
 - [X] CLI: Node Process
 - [ ] CLI: Host System Info
 - [ ] CLI: Host Environment Variables
-- [ ] API:  Get Nodes
+- [X] API:  Get APPS
 - [ ] API:  Get Host Info
-- [ ] API:  Expose Nodes interactions via websockets in real-time
-- [ ] API:  Expose Nodes metrics via websockets in real-time
+- [ ] API:  Expose Nodes interactions via websockets or SSE in real-time
+- [ ] API:  Expose Nodes metrics via websockets or SSE in real-time
 - [X] UI:   Create UI
-- [ ] UI:   Show Nodes
-- [ ] UI:   Show Nodes Info
-- [ ] UI:   Show Nodes Interactions Animations (websockets)
-- [ ] UI:   Show Nodes 
+- [ ] UI:   Show Nodes related to the local apps 
+- [ ] UI:   Show bottom panel with tabs to display different information and tools
+- [ ] UI:   Show Nodes related to the external services (apis, dbs, etc)
+- [ ] UI:   Show Nodes Info (cpu, mem, pid, process name, ports, type (service, vm or container), etc)
+- [ ] UI:   Show Nodes Interactions Animations (websockets or SSE)
+- [ ] UI:   Show Requests Node
 
 # Ideas
 
