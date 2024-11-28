@@ -57,7 +57,7 @@
   👇 By default, the Svelte Flow container has a height of 100%.
   This means that the parent container needs a height to render the flow.
   -->
-  <div style:height="90vh">
+  <div style:height="100vh">
 	<SvelteFlow
 	  {nodes}
 	  {edges}

@@ -10,10 +10,5 @@
 		{@render children()}
 	</main>
 
-	<footer>
-		<p>
-			BEER - BackEnd Engineers Rocks
-		</p>
-	</footer>
 </div>
 
