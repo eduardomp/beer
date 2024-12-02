@@ -6,6 +6,7 @@
 	  Background,
 	  BackgroundVariant,
 	  MiniMap,
+	  Panel,
 	  type ColorMode,
 	  type Node,
 	  type Edge,
@@ -14,6 +15,7 @@
    
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
 	import '@xyflow/svelte/dist/style.css';
+	import HostInfo from './host-info.svelte';
    
 	// We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
 	const initialNodes : Node[] = [
@@ -69,5 +71,6 @@
 	  <Controls />
 	  <Background variant={BackgroundVariant.Dots} />
 	  <MiniMap />
+	  <Panel position="top-left"><HostInfo /></Panel>
 	</SvelteFlow>
   </div>
