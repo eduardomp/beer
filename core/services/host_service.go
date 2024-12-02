@@ -2,6 +2,7 @@ package services
 
 import (
 	"beer/core/model"
+	"time"
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/inhies/go-bytesize"
@@ -28,4 +29,14 @@ func GetHost() model.Host {
 		},
 	}
 
+}
+
+func GetHostInfoToChannel(hostInfo chan model.Host) {
+	//every 3 seconds
+	//TODO: externalize this delay time
+	for {
+		time.Sleep(3 * time.Second)
+		host := GetHost()
+		hostInfo <- host
+	}
 }

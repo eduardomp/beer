@@ -8,6 +8,7 @@ import (
 )
 
 var routes = map[string]func(http.ResponseWriter, *http.Request){
+	"GET /sse":         GetSSEHandler,
 	"GET /api/v1/apps": GetAppsHandler,
 }
 
