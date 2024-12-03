@@ -15,7 +15,7 @@
 		Memo: Memo;
 	}
 
-	let messages = writable<HostInfo>({
+	let hostInfo = writable<HostInfo>({
 		Host: '',
 		OS: '',
 		Arch: '',
@@ -31,20 +31,18 @@
 
 	evtSource.addEventListener('hostInfo', function (event: MessageEvent) {
 		var dataobj: HostInfo = JSON.parse(event.data);
-		messages.set(dataobj);
+		hostInfo.set(dataobj);
 	});
 </script>
 
-<div class="text-column w-52 content-start text-sm text-white">
-	<h2>Host Info</h2>
-	<p>OS: {$messages.OS}</p>
-	<p>Arch: {$messages.Arch}</p>
-	<p>Name: {$messages.Host}</p>
+<div class="text-column w-40 p-5 content-start text-xs text-white bg-[#2C2C2C] rounded-sm">
+	<p>{$hostInfo.Host}</p>
+	<p>{$hostInfo.OS} - {$hostInfo.Arch}</p>
 	<p>Memory:</p>
 	<ul class="ml-4">
-		<li>Total: {$messages.Memo?.Total}</li>
-		<li>Free: {$messages.Memo?.Free}</li>
-		<li>Used: {$messages.Memo?.Used}</li>
-		<li>Available: {$messages.Memo?.Available}</li>
+		<li>Total: {$hostInfo.Memo?.Total}</li>
+		<li>Free: {$hostInfo.Memo?.Free}</li>
+		<li>Used: {$hostInfo.Memo?.Used}</li>
+		<li>Available: {$hostInfo.Memo?.Available}</li>
 	</ul>
 </div>

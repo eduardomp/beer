@@ -39,7 +39,7 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 }
 
 func GetApps() []model.App {
-	configPath := util.Config("BEER_CONFIG_PATH", "${PWD}/config.beer.yml")
+	configPath := util.GetBeerConfig()
 	apps := GetAppsFromConfig(configPath)
 	processes := GetProcessInfo()
 
