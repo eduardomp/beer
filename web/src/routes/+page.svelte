@@ -71,6 +71,8 @@
 	  <Controls />
 	  <Background variant={BackgroundVariant.Dots} />
 	  <MiniMap />
-	  <Panel position="top-left"><HostInfo /></Panel>
+	  <Panel position="top-center">
+		<HostInfo />
+	  </Panel>
 	</SvelteFlow>
   </div>

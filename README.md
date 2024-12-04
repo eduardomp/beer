@@ -9,6 +9,13 @@ TODO
 ## Setup
 TODO
 
+### Environment Variables
+
+| Name | Description | Default |
+| --- | --- | --- |
+| BEER_CONFIG_PATH | The path to the project config file. If not informed, it will be searched in the current directory | "config.beer.yml" |
+| BEER_HOST_INFO_INTERVAL | The interval in seconds that BEER will scan the host info and send the event "hostInfo" to the "/sse" endpoint | 3 |
+
 ## Base Directory Structure
 
 ```shell
@@ -20,7 +27,7 @@ TODO
 └── web							// WEB   - The user interface that consumes the REST API (Svelte)
 ```
 
-## Building
+## Building and Running the Application
 
 First you need to install the dependencies and buid the web application:
 
@@ -44,39 +51,39 @@ The folder web/build contains the static files that are served by the web applic
 - [ ] CORE: Create a scheme and validator to the config yml file
 - [X] CLI: Read config
 - [X] CLI: Load entities from config
-- [ ] CLI: Support docker compose file to get Nodes, ports and volumes
+- [ ] CLI: Support docker compose file to get Apps, ports and volumes
 - [ ] CLI: Support external Services 
-- [ ] CLI: Sniff local network to get Nodes communication
-- [ ] CLI: Watch Node volumes or directories
-- [ ] CLI: Watch Node ports
-- [ ] CLI: Watch Node db connections
-- [ ] CLI: Node Healthcheck
-- [ ] CLI: Node Logs
-- [ ] CLI: Node Metrics
-- [ ] CLI: Node CPU
-- [ ] CLI: Node Memory
-- [ ] CLI: Node Disk
-- [ ] CLI: Node Network
-- [X] CLI: Node Process
-- [ ] CLI: Host System Info
+- [ ] CLI: Sniff local network to get Apps communication
+- [ ] CLI: Watch App volumes or directories
+- [ ] CLI: Watch App ports
+- [ ] CLI: Watch App db connections
+- [ ] CLI: App Healthcheck
+- [ ] CLI: App Logs
+- [ ] CLI: App Metrics
+- [ ] CLI: App CPU
+- [ ] CLI: App Memory
+- [ ] CLI: App Disk
+- [ ] CLI: App Network
+- [X] CLI: App Process
+- [X] CLI: Host System Info
 - [ ] CLI: Host Environment Variables
 - [X] API:  Get APPS
-- [ ] API:  Get Host Info
-- [ ] API:  Expose Nodes interactions via websockets or SSE in real-time
-- [ ] API:  Expose Nodes metrics via websockets or SSE in real-time
+- [X] API:  Get Host Info
+- [ ] API:  Expose Apps interactions via websockets or SSE in real-time
+- [ ] API:  Expose Apps metrics via websockets or SSE in real-time
 - [X] UI:   Create UI
-- [ ] UI:   Show Nodes related to the local apps 
+- [ ] UI:   Show Apps related to the local apps 
 - [ ] UI:   Show bottom panel with tabs to display different information and tools
-- [ ] UI:   Show Nodes related to the external services (apis, dbs, etc)
-- [ ] UI:   Show Nodes Info (cpu, mem, pid, process name, ports, type (service, vm or container), etc)
-- [ ] UI:   Show Nodes Interactions Animations (websockets or SSE)
-- [ ] UI:   Show Requests Node
+- [ ] UI:   Show Apps related to the external services (apis, dbs, etc)
+- [ ] UI:   Show Apps Info (cpu, mem, pid, process name, ports, type (service, vm or container), etc)
+- [ ] UI:   Show Apps Interactions Animations (websockets or SSE)
+- [ ] UI:   Show Requests App
 
 # Ideas
 
 ## 1 
 
-Add http requests to the config file to create a Node in UI with a list of requests to be made against the apps
+Add http requests to the config file to create a App in UI with a list of requests to be made against the apps
 following the syntax of ```.http``` files https://learn.microsoft.com/en-us/aspnet/core/test/http-files?view=aspnetcore-9.0#http-file-syntax
 
 
