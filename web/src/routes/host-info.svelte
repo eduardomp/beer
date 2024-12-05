@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-
+    import { onMount } from 'svelte';
+    
 	let hostInfo = writable<HostInfo>({
 		Host: '',
 		OS: '',
@@ -17,9 +18,7 @@
     let freeMemoryColor = writable<string>('');
     let availableMemoryColor = writable<string>('');
 
-    //TODO: Externalize the SSE endpoint
-	let evtSource = new EventSource('http://localhost:9999/sse');
-
+    
     function convertToBytes(input: string): number {
         let result = 0;
         let marker = 1024;
@@ -94,13 +93,19 @@
         return getMemoryColorNearTotalIsBetter(total, available);
     }
 
-	evtSource.addEventListener('hostInfo', function (event: MessageEvent) {
-		var dataobj: HostInfo = JSON.parse(event.data);
-		hostInfo.set(dataobj);
-        usedMemoryColor.set(getUsedMemoryColor(dataobj.Memo));
-        freeMemoryColor.set(getFreeMemoryColor(dataobj.Memo));
-        availableMemoryColor.set(getAvailableMemoryColor(dataobj.Memo));
-	});
+    onMount(() => {
+        //TODO: Externalize the SSE endpoint
+	    let evtSource = new EventSource('http://localhost:9999/sse');
+
+        evtSource.addEventListener('hostInfo', function (event: MessageEvent) {
+            var dataobj: HostInfo = JSON.parse(event.data);
+            hostInfo.set(dataobj);
+            usedMemoryColor.set(getUsedMemoryColor(dataobj.Memo));
+            freeMemoryColor.set(getFreeMemoryColor(dataobj.Memo));
+            availableMemoryColor.set(getAvailableMemoryColor(dataobj.Memo));
+        });
+    })
+
 </script>
 
 <div class="w-auto text-xs font-extrabold text-white bg-[#2C2C2C] rounded-sm p-1">

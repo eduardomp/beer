@@ -15,6 +15,25 @@ declare global {
 		Arch: string;
 		Memo: Memo;
 	}
+
+	interface App {
+		Name: string;
+		Ports: number[];
+		Host: string;
+		Type: string;
+		Volumes: string[];
+		Dirs: string[];
+		Process: Process;
+	}
+
+	interface Process {
+		Name: string;
+		Pid: number;
+		Status: string;
+		Cmdline: string;
+		Connections: any[];
+	}
+
 	namespace App {
 		// interface Error {}
 		// interface Locals {}
