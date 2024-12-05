@@ -11,6 +11,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+// TODO: Add function to get apps from docker compose file
 func GetAppsFromConfig(configPath string) model.Apps {
 	config, error := os.ReadFile(configPath)
 	if error != nil {
@@ -38,21 +39,25 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 	return len(ports) > 0
 }
 
-func GetApps() []model.App {
+func GetApps(fetchProcesses bool) []model.App {
 	configPath := util.GetBeerConfig()
 	apps := GetAppsFromConfig(configPath)
-	processes := GetProcessInfo()
-
 	result := make([]model.App, 0)
 
-	for _, app := range apps.Apps {
-		for _, process := range processes {
-			if IsAppPortsInProcessConnections(app, process.Connections) {
-				app.Process = process
-				result = append(result, app)
+	if fetchProcesses {
+		processes := GetProcessInfo()
+		for _, app := range apps.Apps {
+			for _, process := range processes {
+				if IsAppPortsInProcessConnections(app, process.Connections) {
+					app.Process = process
+					result = append(result, app)
+				}
 			}
 		}
+		return result
 	}
+
+	result = append(result, apps.Apps...)
 
 	return result
 }
