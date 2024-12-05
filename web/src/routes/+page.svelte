@@ -16,6 +16,7 @@
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
 	import '@xyflow/svelte/dist/style.css';
 	import HostInfo from './host-info.svelte';
+	import Toolbar from './toolbar.svelte';
 	import type { PageData } from './$types';
 	
 	export let data: PageData;
@@ -48,7 +49,7 @@
   👇 By default, the Svelte Flow container has a height of 100%.
   This means that the parent container needs a height to render the flow.
   -->
-  <div style:height="100vh">
+  <div style:height="100vh" class="flex flex-col">
 	<SvelteFlow
 	  {nodes}
 	  {edges}
@@ -64,4 +65,5 @@
 		<HostInfo />
 	  </Panel>
 	</SvelteFlow>
-  </div>
+	<Toolbar />
+</div>
