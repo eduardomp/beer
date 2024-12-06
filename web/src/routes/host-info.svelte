@@ -17,7 +17,6 @@
     let usedMemoryColor = writable<string>('');
     let freeMemoryColor = writable<string>('');
     let availableMemoryColor = writable<string>('');
-
     
     function convertToBytes(input: string): number {
         let result = 0;
@@ -108,14 +107,14 @@
 
 </script>
 
-<div class="w-auto text-xs font-extrabold text-white bg-[#2C2C2C] rounded-sm p-1">
- 	<p>
-        {$hostInfo.Host} | 
-        {$hostInfo.OS} {$hostInfo.Arch} | 
-        MEM: 
-        Total <span class="text-blue-500">{$hostInfo.Memo?.Total}</span> 
-        Used  <span class="{$usedMemoryColor}">{$hostInfo.Memo?.Used}</span>
-        Free  <span class="{$freeMemoryColor}">{$hostInfo.Memo?.Free}</span>
-        Available <span class="{$availableMemoryColor}">{$hostInfo.Memo?.Available}</span>
-    </p>
+<div class="w-auto text-xs font-extrabold text-white bg-[#2C2C2C] p-2 grid grid-cols-1 gap-4 place-items-end border-t-2 border-gray-300">
+    <div>
+        <span>{$hostInfo.Host}</span> |
+        <span>{$hostInfo.OS} {$hostInfo.Arch}</span> |
+        <span>MEM:</span>
+        <span class="w-1">Total <span class="text-blue-500">{$hostInfo.Memo?.Total}</span></span> |
+        <span class="w-1">Used  <span class="{$usedMemoryColor}">{$hostInfo.Memo?.Used}</span></span> |
+        <span class="w-1">Free  <span class="{$freeMemoryColor}">{$hostInfo.Memo?.Free}</span></span> |
+        <span class="w-1">Available <span class="{$availableMemoryColor}">{$hostInfo.Memo?.Available}</span></span>
+    </div>
 </div>

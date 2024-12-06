@@ -1,20 +1,29 @@
 <script lang="ts">
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
-	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Tabs from '$lib/components/ui/tabs';
 </script>
 
+
+// TODO: Turn the tabs gray and not rounded
+// TODO: When click on any tab, open the content, if click again in another tab, just change the content without close
+// TODO: Improve the border of the host-info component
+// TODO: Receive props from the parent component
+// TODO: List the tabs related to the apps
+// TODO: Shows content related to the apps
+// TODO: When click on a node, selects the correspondent tab on the toolbar opening the content
+
 <Collapsible.Root class="v-[10vh] bg-[#2C2C2C] text-white">
-	<div class="flex items-center justify-between space-x-4 px-4">
-		<h4 class="text-sm font-semibold">@huntabyte starred 3 repositories</h4>
-		<Collapsible.Trigger asChild let:builder>
-			<Button builders={[builder]} variant="ghost" size="sm" class="w-9 p-0">
-				
-				<span class="sr-only">Toggle</span>
-			</Button>
-		</Collapsible.Trigger>
-	</div>
-	<Collapsible.Content class="space-y-2">
-		<div class="rounded-md border px-4 py-3 font-mono text-sm">@melt-ui/melt-ui</div>
-		<div class="rounded-md border px-4 py-3 font-mono text-sm">@sveltejs/svelte</div>
-	</Collapsible.Content>
+	<Tabs.Root value="account" class="w-[400px]">
+        <Collapsible.Trigger>
+		    <Tabs.List>
+				<Tabs.Trigger value="account">Account</Tabs.Trigger>
+				<Tabs.Trigger value="password">Password</Tabs.Trigger>
+            </Tabs.List>
+        </Collapsible.Trigger>
+
+		<Collapsible.Content class="space-y-2 h-40">
+			<Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
+			<Tabs.Content value="password">Change your password here.</Tabs.Content>
+		</Collapsible.Content>
+	</Tabs.Root>
 </Collapsible.Root>

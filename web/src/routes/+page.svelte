@@ -45,10 +45,6 @@
   	const edges = writable(initialEdges);
   </script>
    
-  <!--
-  👇 By default, the Svelte Flow container has a height of 100%.
-  This means that the parent container needs a height to render the flow.
-  -->
   <div style:height="100vh" class="flex flex-col">
 	<SvelteFlow
 	  {nodes}
@@ -61,9 +57,7 @@
 	  <Controls />
 	  <Background variant={BackgroundVariant.Dots} />
 	  <MiniMap />
-	  <Panel position="top-center">
-		<HostInfo />
-	  </Panel>
 	</SvelteFlow>
 	<Toolbar />
+	<HostInfo />
 </div>
