@@ -3,9 +3,9 @@
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import * as Tabs from '$lib/components/ui/tabs';
 	import { ChevronsUpDown } from 'lucide-svelte';
-	// TODO: Receive props from the parent component
-	// TODO: List the tabs related to the apps
-	// TODO: Shows content related to the apps
+
+	export let apps: App[];
+
 	// TODO: When click on a node, selects the correspondent tab on the toolbar opening the content
 </script>
 
@@ -19,19 +19,22 @@
 		</Collapsible.Trigger>
 		
 		<Tabs.List class="bg-[#2C2C2C]">
-			<Tabs.Trigger
-				class="data-[state=active]:border-b-2 data-[state=active]:border-[#8D42F7] data-[state=active]:bg-[#2C2C2C] data-[state=active]:text-white"
-				value="account">Account</Tabs.Trigger
-			>
-			<Tabs.Trigger
-				class="data-[state=active]:border-b-2 data-[state=active]:border-[#8D42F7] data-[state=active]:bg-[#2C2C2C] data-[state=active]:text-white"
-				value="password">Password</Tabs.Trigger
-			>
+
+			{#each apps as app}
+				<Tabs.Trigger
+					class="data-[state=active]:border-b-2 data-[state=active]:border-[#8D42F7] data-[state=active]:bg-[#2C2C2C] data-[state=active]:text-white"
+					value={app.Name}>{app.Name}</Tabs.Trigger
+				>
+			{/each}
+
 		</Tabs.List>
 
 		<Collapsible.Content class="h-40 space-y-2">
-			<Tabs.Content value="account">Make changes to your account here.</Tabs.Content>
-			<Tabs.Content value="password">Change your password here.</Tabs.Content>
+
+			{#each apps as app}
+				<Tabs.Content value={app.Name}>{app.Name}</Tabs.Content>
+			{/each}
+
 		</Collapsible.Content>
 	</Tabs.Root>
 </Collapsible.Root>

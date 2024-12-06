@@ -58,6 +58,6 @@
 	  <Background variant={BackgroundVariant.Dots} />
 	  <MiniMap />
 	</SvelteFlow>
-	<Toolbar />
+	<Toolbar {apps} />
 	<HostInfo />
 </div>
