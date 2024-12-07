@@ -5,6 +5,7 @@ import (
 	"beer/util"
 	"os"
 	"slices"
+	"strings"
 
 	"github.com/shirou/gopsutil/net"
 
@@ -13,6 +14,7 @@ import (
 
 // TODO: Add function to get apps from docker compose file
 func GetAppsFromConfig(configPath string) model.Apps {
+	result := model.Apps{}
 	config, error := os.ReadFile(configPath)
 	if error != nil {
 		panic(error)
@@ -24,7 +26,12 @@ func GetAppsFromConfig(configPath string) model.Apps {
 		panic(err)
 	}
 
-	return apps
+	for _, app := range apps.Apps {
+		app.Id = strings.ToLower(strings.Trim(app.Name, " "))
+		result.Apps = append(result.Apps, app)
+	}
+
+	return result
 
 }
 
