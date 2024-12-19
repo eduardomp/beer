@@ -36,6 +36,8 @@
 	});
 
 	let colorMode: ColorMode = 'dark';
+	let fitView = true;
+	let snapGrid: number[] = [20, 20];
 	let proOptions: ProOptions = {
 		hideAttribution: true
 	};
@@ -52,8 +54,9 @@
 		{nodes}
 		{edges}
 		{colorMode}
-		fitView
+		{fitView}
 		{proOptions}
+		{snapGrid}
 		on:nodeclick={(event: { detail: { node: any } }) => {
 			selectedTabId.set(event.detail.node.id);
 			isToolbarOpen.set(true);
