@@ -107,7 +107,7 @@
 
 </script>
 
-<div class="w-auto text-xs font-extrabold text-white bg-[#2C2C2C] p-2 grid grid-cols-1 gap-4 place-items-end border-t-2 border-[#8D42F7]">
+<div class="w-auto text-xs font-extrabold text-white bg-[#8D42F7] p-2 grid grid-cols-1 gap-4 place-items-end">
     <div>
         <span>{$hostInfo.Host}</span> |
         <span>{$hostInfo.OS} {$hostInfo.Arch}</span> |

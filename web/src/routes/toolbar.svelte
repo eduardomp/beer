@@ -4,6 +4,7 @@
 	import * as Tabs from '$lib/components/ui/tabs';
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { writable } from 'svelte/store';
+	import ToolbarActions from './toolbar-actions.svelte';
 
 	export let apps: App[];
 	export let selectedTabId = "";
@@ -30,11 +31,13 @@
 			{/each}
 
 		</Tabs.List>
-
-		<Collapsible.Content class="h-40 space-y-2">
+		
+		<Collapsible.Content class="h-40 space-y-2 border-t-2 border-[#737373]">
 
 			{#each apps as app}
-				<Tabs.Content value={app.Id}>{app.Name}</Tabs.Content>
+				<Tabs.Content value={app.Id}>
+					<ToolbarActions {app} />
+				</Tabs.Content>
 			{/each}
 
 		</Collapsible.Content>

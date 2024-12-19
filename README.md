@@ -78,6 +78,9 @@ The folder web/build contains the static files that are served by the web applic
 - [ ] UI:   Show Apps Info (cpu, mem, pid, process name, ports, type (service, vm or container), etc)
 - [ ] UI:   Show Apps Interactions Animations (websockets or SSE)
 - [ ] UI:   Show Requests App
+- [ ] UI:   Create logo
+- [ ] UI:   Favicon
+- [ ] UI:   Canvas watermark with beer logo
 
 # Ideas
 
