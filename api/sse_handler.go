@@ -15,9 +15,11 @@ func GetSSEHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	hostInfoChan := make(chan model.Host)
+	connectionsChan := make(chan model.Connections)
 	//appsChan := make(chan model.Apps)
 
 	go services.GetHostInfoToChannel(hostInfoChan)
+	go services.GetConnectionsToChannel(connectionsChan)
 
 	for {
 		select {
@@ -25,6 +27,11 @@ func GetSSEHandler(w http.ResponseWriter, r *http.Request) {
 			hostInfo, _ := json.Marshal(host)
 			fmt.Fprintf(w, "event: hostInfo\n")
 			fmt.Fprintf(w, "data: %s\n\n", hostInfo)
+			w.(http.Flusher).Flush()
+		case connections := <-connectionsChan:
+			connectionsInfo, _ := json.Marshal(connections)
+			fmt.Fprintf(w, "event: connectionsInfo\n")
+			fmt.Fprintf(w, "data: %s\n\n", connectionsInfo)
 			w.(http.Flusher).Flush()
 		}
 	}
