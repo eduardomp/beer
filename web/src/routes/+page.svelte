@@ -1,73 +1,71 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
 	import {
-	  SvelteFlow,
-	  Controls,
-	  Background,
-	  BackgroundVariant,
-	  MiniMap,
-	  type ColorMode,
-	  type Node,
-	  type Edge,
-	  type ProOptions,
+		SvelteFlow,
+		Controls,
+		Background,
+		BackgroundVariant,
+		MiniMap,
+		type ColorMode,
+		type Node,
+		type Edge,
+		type ProOptions
 	} from '@xyflow/svelte';
-   
+
 	// 👇 this is important! You need to import the styles for Svelte Flow to work
 	import '@xyflow/svelte/dist/style.css';
-   
-	// We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
-	const initialNodes : Node[] = [
-	  {
-		id: '1',
-		type: 'input',
-		data: { label: 'Input Node', body: "This is the input node" },
-		style: 'border: 1px solid #8e42f7; padding: 10px;',
-		position: { x: 0, y: 0 }
-	  },
-	  {
-		id: '2',
-		type: 'default',
-		data: { label: 'Node' },
-		style: 'border: 1px solid #8e42f7; padding: 10px;',
-		position: { x: 0, y: 150 }
-	  }
-	];
-   
-	// same for edges
-	const initialEdges: Edge[] = [
-	  {
-		id: '1-2',
-		type: 'default',
-		source: '1',
-		target: '2',
-		label: 'HTTP'
-	  }
-	];
-   
+	import HostInfo from './host-info.svelte';
+	import Toolbar from './toolbar.svelte';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	const initialNodes: Node[] = [];
+	const initialEdges: Edge[] = [];
+
+	let apps: App[] = data.response;
+
+	apps.forEach((app, index) => {
+		initialNodes.push({
+			id: app.Id,
+			type: 'default',
+			data: { label: app.Name },
+			style: 'border: 1px solid #8e42f7; padding: 10px;',
+			position: { x: index * 300, y: 0 }
+		});
+	});
+
 	let colorMode: ColorMode = 'dark';
+	let fitView = true;
+	let snapGrid: number[] = [20, 20];
 	let proOptions: ProOptions = {
-		hideAttribution: true,
-	}
+		hideAttribution: true
+	};
 
 	const nodes = writable<Node[]>(initialNodes);
-  	const edges = writable(initialEdges);
-  </script>
-   
-  <!--
-  👇 By default, the Svelte Flow container has a height of 100%.
-  This means that the parent container needs a height to render the flow.
-  -->
-  <div style:height="100vh">
+	const edges = writable(initialEdges);
+
+	let selectedTabId = writable<string>('');
+	let isToolbarOpen = writable<boolean>(false);
+</script>
+
+<div style:height="100vh" class="flex flex-col">
 	<SvelteFlow
-	  {nodes}
-	  {edges}
-	  {colorMode}
-	  fitView
-	  {proOptions}
-	  on:nodeclick={(event: { detail: { node: any; }; }) => console.log('on node click', event.detail.node)}
+		{nodes}
+		{edges}
+		{colorMode}
+		{fitView}
+		{proOptions}
+		{snapGrid}
+		on:nodeclick={(event: { detail: { node: any } }) => {
+			selectedTabId.set(event.detail.node.id);
+			isToolbarOpen.set(true);
+		}}
 	>
-	  <Controls />
-	  <Background variant={BackgroundVariant.Dots} />
-	  <MiniMap />
+		<Controls />
+		<Background variant={BackgroundVariant.Dots} />
+		<MiniMap />
 	</SvelteFlow>
-  </div>
+	<Toolbar {apps} selectedTabId={$selectedTabId} open={$isToolbarOpen} />
+	<HostInfo />
+</div>

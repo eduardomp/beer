@@ -5,13 +5,16 @@ import (
 	"beer/util"
 	"os"
 	"slices"
+	"strings"
 
 	"github.com/shirou/gopsutil/net"
 
 	"gopkg.in/yaml.v3"
 )
 
+// TODO: Add function to get apps from docker compose file
 func GetAppsFromConfig(configPath string) model.Apps {
+	result := model.Apps{}
 	config, error := os.ReadFile(configPath)
 	if error != nil {
 		panic(error)
@@ -23,7 +26,12 @@ func GetAppsFromConfig(configPath string) model.Apps {
 		panic(err)
 	}
 
-	return apps
+	for _, app := range apps.Apps {
+		app.Id = strings.ToLower(strings.Trim(app.Name, " "))
+		result.Apps = append(result.Apps, app)
+	}
+
+	return result
 
 }
 
@@ -38,21 +46,25 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 	return len(ports) > 0
 }
 
-func GetApps() []model.App {
-	configPath := util.Config("BEER_CONFIG_PATH", "${PWD}/config.beer.yml")
+func GetApps(fetchProcesses bool) []model.App {
+	configPath := util.GetBeerConfig()
 	apps := GetAppsFromConfig(configPath)
-	processes := GetProcessInfo()
-
 	result := make([]model.App, 0)
 
-	for _, app := range apps.Apps {
-		for _, process := range processes {
-			if IsAppPortsInProcessConnections(app, process.Connections) {
-				app.Process = process
-				result = append(result, app)
+	if fetchProcesses {
+		processes := GetProcessInfo()
+		for _, app := range apps.Apps {
+			for _, process := range processes {
+				if IsAppPortsInProcessConnections(app, process.Connections) {
+					app.Process = process
+					result = append(result, app)
+				}
 			}
 		}
+		return result
 	}
+
+	result = append(result, apps.Apps...)
 
 	return result
 }

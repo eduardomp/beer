@@ -2,6 +2,9 @@ package services
 
 import (
 	"beer/core/model"
+	"beer/util"
+	"strconv"
+	"time"
 
 	"github.com/elastic/go-sysinfo"
 	"github.com/inhies/go-bytesize"
@@ -28,4 +31,14 @@ func GetHost() model.Host {
 		},
 	}
 
+}
+
+func GetHostInfoToChannel(hostInfo chan model.Host) {
+	delay := util.GetEnv("BEER_HOST_INFO_INTERVAL", "3")
+	i, _ := strconv.Atoi(delay)
+	for {
+		time.Sleep(time.Duration(i) * time.Second)
+		host := GetHost()
+		hostInfo <- host
+	}
 }

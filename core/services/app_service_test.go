@@ -28,7 +28,9 @@ func TestGetAppsFromConfig(t *testing.T) {
 			},
 		},
 	}
-	configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
+
+	util.SetEnv("BEER_CONFIG_PATH", "../../config.beer.yml")
+	configPath := util.GetBeerConfig()
 
 	got := GetAppsFromConfig(configPath)
 

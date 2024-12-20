@@ -18,7 +18,7 @@ var (
 		Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
 		Run: func(cmd *cobra.Command, args []string) {
 
-			configPath := util.Config("BEER_CONFIG_PATH", "../../config.beer.yml")
+			configPath := util.GetBeerConfig()
 
 			if cfgFile != "" {
 				configPath = cfgFile

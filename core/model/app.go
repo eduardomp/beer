@@ -1,6 +1,7 @@
 package model
 
 type App struct {
+	Id      string
 	Name    string
 	Ports   []int
 	Host    string
