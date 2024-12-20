@@ -34,6 +34,16 @@ declare global {
 		Cmdline: string;
 		Connections: any[];
 	}
+	interface Connection {
+		SourceApp: App;
+		TargetApp: App;
+		Protocol: string;
+		TargetPort: number;
+		Status: string;
+		StartTimestamp: string;
+		EndTimestamp: string;
+		Duration: string;
+	}
 
 	namespace App {
 		// interface Error {}

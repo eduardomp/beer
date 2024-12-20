@@ -7,7 +7,7 @@ import (
 
 func GetConnectionsToChannel(connectionsChan chan model.Connections) {
 	for {
-		time.Sleep(time.Duration(3) * time.Second)
+		time.Sleep(time.Duration(30) * time.Second)
 		connections := GetConnections()
 		connectionsChan <- connections
 	}
@@ -28,7 +28,7 @@ func GetConnections() model.Connections {
 					Host:  "localhost",
 					Ports: []int{5432},
 				},
-				Protocol:       "TCP",
+				Protocol:       "HTTP",
 				TargetPort:     5432,
 				Status:         "ESTABLISHED",
 				StartTimestamp: timestamp.Format(time.RFC3339),

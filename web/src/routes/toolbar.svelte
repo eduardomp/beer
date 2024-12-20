@@ -5,6 +5,7 @@
 	import { ChevronsUpDown } from 'lucide-svelte';
 	import { writable } from 'svelte/store';
 	import ToolbarActions from './toolbar-actions.svelte';
+	import ToolbarNetwork from './toolbar-network.svelte';
 
 	export let apps: App[];
 	export let selectedTabId = "";
@@ -22,6 +23,10 @@
 		</Collapsible.Trigger>
 		
 		<Tabs.List class="bg-[#2C2C2C]" >
+			<Tabs.Trigger
+					class="data-[state=active]:border-b-2 data-[state=active]:border-[#8D42F7] data-[state=active]:bg-[#2C2C2C] data-[state=active]:text-white"
+					value={"network_tab"}>network
+			</Tabs.Trigger>
 
 			{#each apps as app}
 				<Tabs.Trigger
@@ -33,6 +38,10 @@
 		</Tabs.List>
 		
 		<Collapsible.Content class="h-40 space-y-2 border-t-2 border-[#737373]">
+
+			<Tabs.Content value={"network_tab"}>
+				<ToolbarNetwork />
+			</Tabs.Content>
 
 			{#each apps as app}
 				<Tabs.Content value={app.Id}>
