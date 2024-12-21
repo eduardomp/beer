@@ -25,7 +25,7 @@
         <Table.Root>
          <Table.Caption>list of captured connections</Table.Caption>
          <Table.Header>
-          <Table.Row>
+          <Table.Row class="hover:bg-inherit">
             <Table.Head class="h-3 text-center">#</Table.Head>
             <Table.Head class="h-3 text-center w-[100px]">Source</Table.Head>
             <Table.Head class="h-3 text-center">Target</Table.Head>
@@ -36,7 +36,7 @@
          </Table.Header>
          <Table.Body>
           {#each $connections as connection, i}
-           <Table.Row class="even:bg-[#353535]">
+           <Table.Row class="even:bg-[#353535] hover:bg-muted/20">
             <Table.Cell class="h-3 p-0 border-[#737373] font-bold text-center text-[#21C55D]">{i}</Table.Cell>
             <Table.Cell class="h-3 p-0 border-[#737373] font-bold text-center text-[#21C55D]">{connection.SourceApp.Name}</Table.Cell>
             <Table.Cell class="h-3 p-0 border-[#737373] font-bold text-center text-[#21C55D]">{connection.TargetApp.Name}</Table.Cell>

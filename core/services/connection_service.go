@@ -7,7 +7,7 @@ import (
 
 func GetConnectionsToChannel(connectionsChan chan model.Connections) {
 	for {
-		time.Sleep(time.Duration(30) * time.Second)
+		time.Sleep(time.Duration(10) * time.Second)
 		connections := GetConnections()
 		connectionsChan <- connections
 	}
