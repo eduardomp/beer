@@ -4,6 +4,7 @@ go 1.23
 
 require (
 	github.com/elastic/go-sysinfo v1.14.2
+	github.com/google/gopacket v1.1.19
 	github.com/inhies/go-bytesize v0.0.0-20220417184213-4913239db9cf
 	github.com/joho/godotenv v1.5.1
 	github.com/shirou/gopsutil v3.21.11+incompatible
