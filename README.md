@@ -29,6 +29,24 @@ TODO
 
 ## Building and Running the Application
 
+### Using make (recomended)
+
+To build
+
+```shell
+make build
+```
+
+To run
+
+```shell
+make run
+```
+
+Check makefile to see the other automations.
+
+### Without make
+
 First you need to install the dependencies and buid the web application:
 
 ```shell
