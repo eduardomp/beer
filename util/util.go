@@ -35,16 +35,38 @@ func GetEnv(key string, defaultValue ...string) string {
 	return ""
 }
 
-func GetBeerConfig() string {
-	result := GetEnv("BEER_CONFIG_PATH")
-
-	if result == "" {
-		exPath := GetExecutablePath()
-
-		result = filepath.Join(exPath, "config.beer.yml")
+func GetBeerConfigFile() string {
+	// create a default config file if it does not exist
+	defaultConfig := []byte("apps:")
+	configFile := filepath.Join(GetBeerConfigDir(), "config.beer.yml")
+	if _, err := os.Stat(configFile); os.IsNotExist(err) {
+		err = os.WriteFile(configFile, defaultConfig, 0644)
+		if err != nil {
+			log.Fatal("Error creating default config file")
+		}
 	}
+	return GetEnv("BEER_CONFIG_PATH", configFile)
+}
 
-	return result
+func GetBeerConfigDir() string {
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal("Error getting user home directory")
+	}
+	// Check if the .beer directory exists
+	beerDir := filepath.Join(homeDir, ".beer")
+	if _, err := os.Stat(beerDir); os.IsNotExist(err) {
+		// Create the .beer directory if it does not exist
+		err = os.MkdirAll(beerDir, 0755)
+		if err != nil {
+			log.Fatal("Error creating .beer directory")
+		}
+		err = os.MkdirAll(filepath.Join(beerDir, "projects"), 0755)
+		if err != nil {
+			log.Fatal("Error creating .beer/projects directory")
+		}
+	}
+	return beerDir
 }
 
 func GetExecutablePath() string {

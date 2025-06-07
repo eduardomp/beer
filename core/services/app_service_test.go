@@ -2,7 +2,6 @@ package services
 
 import (
 	"beer/core/model"
-	"beer/util"
 	"reflect"
 	"testing"
 )
@@ -29,10 +28,7 @@ func TestGetAppsFromConfig(t *testing.T) {
 		},
 	}
 
-	util.SetEnv("BEER_CONFIG_PATH", "../../config.beer.yml")
-	configPath := util.GetBeerConfig()
-
-	got := GetAppsFromConfig(configPath)
+	got := GetAppsFromConfig()
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("GetApps() = %v, want %v", got, want)

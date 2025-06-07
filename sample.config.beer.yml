@@ -1,0 +1,11 @@
+projects:
+ 
+ # Sample projects configuration for beer management
+ 
+ # - name: beer sample
+ #   description: Sample project for beer management
+ #   location: ${PROJECTS_DIR}/sample.project.beer.yml
+  
+ # - name: beer sample
+ #   description: Sample project for beer management
+ #   location: /custom/location/another_project.yml

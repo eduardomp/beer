@@ -7,7 +7,7 @@ import (
 
 func TestConfig(t *testing.T) {
 	want := "config.beer.yml"
-	got := GetBeerConfig()
+	got := GetBeerConfigFile()
 	if !strings.HasSuffix(got, want) {
 		t.Errorf("Config() = %v, want %v", got, want)
 	}

@@ -18,14 +18,7 @@ var (
 		Long:  `A tool to help amazing backend developers to visualize their wonderful applications, revealing all the hidden beatiful of the backend layer to the world.`,
 		Run: func(cmd *cobra.Command, args []string) {
 
-			configPath := util.GetBeerConfig()
-
-			if cfgFile != "" {
-				configPath = cfgFile
-				util.SetEnv("BEER_CONFIG_PATH", configPath)
-			}
-
-			log.Printf("Config path: %v\n", configPath)
+			log.Printf("Config path: %v\n", util.GetBeerConfigFile())
 
 			api.RunServer(headless)
 

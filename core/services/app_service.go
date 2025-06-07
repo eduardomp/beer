@@ -13,9 +13,9 @@ import (
 )
 
 // TODO: Add function to get apps from docker compose file
-func GetAppsFromConfig(configPath string) model.Apps {
+func GetAppsFromConfig() model.Apps {
 	result := model.Apps{}
-	config, error := os.ReadFile(configPath)
+	config, error := os.ReadFile(util.GetBeerConfigFile())
 	if error != nil {
 		panic(error)
 	}
@@ -47,8 +47,7 @@ func IsAppPortsInProcessConnections(app model.App, connections []net.ConnectionS
 }
 
 func GetApps(fetchProcesses bool) []model.App {
-	configPath := util.GetBeerConfig()
-	apps := GetAppsFromConfig(configPath)
+	apps := GetAppsFromConfig()
 	result := make([]model.App, 0)
 
 	if fetchProcesses {
