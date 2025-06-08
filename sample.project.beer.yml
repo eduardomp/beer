@@ -1,96 +1,130 @@
-apps:
-  - name: db-1
-    ports:
-      - 5432
-    host: localhost
-    type: container
-    volumes:
-      - /var/lib/mysql
-    dirs:
-      - /var/lib/mysql
-      
-  - name: web-1
-    ports:
-      - 4000
-    host: localhost
-    type: container
-    volumes:
-      - /var/lib/mysql
-    dirs: 
-      - /var/lib/mysql
+project:
+  name: beer_project
+  description: A sample project for managing beer-related tasks
+  version: 1.0.0
 
-triggers:
-  # alias to a shell command or script
-  - name: beer_action
-    type: action
-    # command: "echo 'Action beer trigger executed'"
-    # or script: script_name
-    # like "script: beer_script.sh"
-    script: |
-      echo "Action beer trigger executed from script"
+  services:
+      # required
+    - name: db-1
+      # required
+      ports:
+        - 5432
+      # required type can be 'container', 'application' or 'remote' (if remote, needs the host attribute)
+      # TODO: review how to add credentials for remote services (connector container???)
+      type: remote
+      # optional, if not specified, it will use localhost
+      host: https://db.example.com
+      # optional
+      volumes:
+        - /var/lib/mysql
+      # optional, if not specified the global environment variables will be used
+      env:
+        - name: DB_USER
+          value: beer_user
+        - name: DB_PASSWORD
+          value: beer_password
 
-  # scheduled trigger of an action or command
-  - name: beer
-    type: cron
-    schedule: "0 0 * * *"
-    # or action: action_name
-    command: "echo 'Beer trigger executed'"
+    - name: web-1
+      ports:
+        - 4000
+      host: localhost
+      type: container
+      volumes:
+        - /var/lib/mysql
 
-  # render a button in the UI to trigger an action or command
-  - name: beer
-    type: manual
-    # or action: action_name
-    command: "echo 'Manual beer trigger executed'"
+  triggers:
+    # alias to a shell command or script
+    - name: beer_action
+      description: One single automation
+      type: action
+      # command: "echo 'Action beer trigger executed'"
+      # or script: script_name
+      # like "script: beer_script.sh"
+      script: |
+        echo "Action beer trigger executed from script"
 
-  # creates a mocked webhook endpoint that triggers an action or command
-  - name: beer
-    type: webhook
-    # or command: command_name
-    action: beer_action
-    variables:
-      - name: timestamp
-        type: string
-        default: "2023-10-01T00:00:00Z"
-    request:
-      url: http://localhost:8080/beer
-      method: POST
-      headers:
-        Content-Type: application/json
-      body:
-        message: "Triggered by webhook"
-        timestamp: ${timestamp}
-    
-  - name: beer http
-    type: http_collection
-    variables:
-      - name: beer_id
-        type: integer
-        value: 1
-      
-      - name: beer_name
-        type: string
-        value: "Default Beer"
-      
-      - name: base_url
-        type: string
-        value: "http://localhost:8080/beer"
-    requests: 
-      - name: get_beer
-        description: Get beer details
-        url: ${base_url}
-        method: GET
-        headers:
-          Content-Type: application/json
-        query:
-          id: ${beer_id}
+    # scheduled trigger of an action or command
+    - name: beer_cron_trigger
+      description: Scheduled beer trigger
+      type: cron
+      schedule: "0 0 * * *"
+      # or action: action_name
+      command: "echo 'Beer trigger executed'"
 
-      - name: post_beer
-        description: Post new beer
-        url: ${base_url}
+    # render a button in the UI to trigger an action or command
+    - name: beer_manual_trigger
+      description: Manual beer trigger
+      type: manual
+      # or action: action_name
+      command: "echo 'Manual beer trigger executed'"
+
+    # creates a mocked webhook endpoint that triggers an action or command
+    - name: beer_webhook
+      description: Trigger beer action via webhook
+      type: webhook
+      # or command: command_name
+      action: beer_action
+      variables:
+        - name: timestamp
+          type: string
+          default: "2023-10-01T00:00:00Z"
+      request:
+        url: http://localhost:8080/beer
         method: POST
         headers:
           Content-Type: application/json
         body:
-          name: ${beer_name}
-          type: "IPA"
-          alcohol_content: 5.5
+          message: "Triggered by webhook"
+          timestamp: ${timestamp}
+      
+    - name: beer_http
+      description: HTTP collection for beer management
+      type: http_collection
+      variables:
+        - name: beer_id
+          type: integer
+          value: 1
+        
+        - name: beer_name
+          type: string
+          value: "Default Beer"
+        
+        - name: base_url
+          type: string
+          value: "http://localhost:8080/beer"
+      requests: 
+        - name: get_beer
+          description: Get beer details
+          url: ${base_url}
+          method: GET
+          headers:
+            Content-Type: application/json
+          query:
+            id: ${beer_id}
+
+        - name: post_beer
+          description: Post new beer
+          url: ${base_url}
+          method: POST
+          headers:
+            Content-Type: application/json
+          body:
+            name: ${beer_name}
+            type: "IPA"
+            alcohol_content: 5.5
+
+  experiments:
+
+    - name: beer_experiment
+      description: Experiment to test beer-related features
+      selected:
+        - beer_http
+        - db-1
+        - web-1
+
+    - name: beer_experiment_2
+      description: Experiment to test beer-related features, without db
+      selected:
+        - beer_http
+        - web-1
+      
