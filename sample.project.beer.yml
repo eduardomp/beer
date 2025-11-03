@@ -3,6 +3,53 @@ project:
   description: A sample project for managing beer-related tasks
   version: 1.0.0
 
+
+
+  #TODO: Create a way to represent the "resources" with CLI commands, focusing more in the representation and visualization, creating a DSL to represent resources, instead of 
+  # a way to manager services, being more agnostic of docker, aws, etc... this increase the flexibility... its possible to turn this into a localstak desktop for Azure, GCP... and so on
+
+  #  dashboard:
+  #      representations:
+  #          - id: DB
+  #            name:
+  #            icon:
+  #            size:
+  #            connections:
+  #              - idA <-> idB
+  #             actions:
+  #               isRunningWhen: command status is 0
+                 
+  #      triggers:
+        
+  # 
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+
   services:
       # required
     - name: db-1
